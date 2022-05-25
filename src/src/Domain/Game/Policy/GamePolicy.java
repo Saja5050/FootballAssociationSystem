@@ -29,11 +29,13 @@ public class GamePolicy  {
     }
     public List<Match> scheduleMatches(String policy){
         List<Match> temp;
-        if(policy=="1"){
+        if(policy.equals("1")){
        temp =scheduleFirstRound(toSchedule);
+
 
         }
         else{
+
             temp=  scheduleFirstRound(toSchedule);
             Collections.reverse(toSchedule);
             temp.addAll(scheduleFirstRound(toSchedule)) ;
@@ -99,15 +101,30 @@ public class GamePolicy  {
 
                 //rotate the team according to the current round
                 int teamIndex = i % (teamListWithoutFirstTeam.size());
+                int year=121;
+                int month=1;
+                int day=1;
 
                 //the first team at index 0 never changes, but every round the homeAway method changes.
                 if (!teamListWithoutFirstTeam.get(teamIndex).getName().equals("NullTeam")) {
                     if (i % 2 == 0) {
-                        matchToAdd = new Match(null, teamList.get(0).getName(), teamListWithoutFirstTeam.get(teamIndex).getName(), l1.getName(), null,null);
+                        matchToAdd = new Match(new Date(year,month,day++), teamList.get(0).getName(), teamListWithoutFirstTeam.get(teamIndex).getName(), l1.getName(), null,null);
                     } else {
-                        matchToAdd = new Match(null, teamListWithoutFirstTeam.get(teamIndex).getName(), teamList.get(0).getName(), l1.getName(), null,null);
+                        matchToAdd = new Match(new Date(year,month,day++), teamListWithoutFirstTeam.get(teamIndex).getName(), teamList.get(0).getName(), l1.getName(), null,null);
                     }
                     matchesList.add(matchToAdd);
+                }
+
+
+                if(day>30)
+                {
+                    day=1;
+                    month++;
+                }
+
+                if(month>12){
+                    month=1;
+                    year++;
                 }
 
                 //runs over the teamsList ( except the first team at index 0 that we already set ), and schedule matches according to their indexes.
@@ -125,15 +142,28 @@ public class GamePolicy  {
 
                         //changes between home and away.
                         if (i % 2 == 0) {
-                            matchToAdd = new Match(null, firstTeam.getName(), secondTeam.getName(), l1.getName(), null,null);
+                            matchToAdd = new Match(new Date(year,month  ,day++), firstTeam.getName(), secondTeam.getName(), l1.getName(), null,null);
 
                         } else {
-                            matchToAdd = new Match(null, secondTeam.getName(), firstTeam.getName(), l1.getName(), null,null);
+                            matchToAdd = new Match(new Date(year,month  ,day++), secondTeam.getName(), firstTeam.getName(), l1.getName(), null,null);
 
                         }
 
                         matchesList.add(matchToAdd);
                     }
+
+
+                    if(day>30)
+                    {
+                        day=1;
+                        month=month++;
+                    }
+
+                    if(month>12){
+                        month=1;
+                        year++;
+                    }
+
                 }
             }
         }

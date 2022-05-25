@@ -25,7 +25,7 @@ public class Match {
         this.home = home;
         this.away = away;
         this.league = league;
-        this.date = new java.util.Date("10/10/2009");;
+        this.date =date;
         this.sqlDate= new java.sql.Date(date.getTime());
         this.time = time;
         this.referee = referee;
