@@ -7,12 +7,12 @@ import org.junit.jupiter.api.DisplayName;
 
 public class SignInTest {
 
-    UserApplication user=new UserApplication();
+    UserApplication user=new UserApplication(); // Stub
 
 
 
     @Test
-    @DisplayName("Sign in with vail System Manager User")
+    @DisplayName("Sign in with vaild System Manager User")
     public void signIn()
     {
 
