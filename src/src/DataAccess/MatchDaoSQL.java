@@ -28,16 +28,17 @@ public class MatchDaoSQL implements Dao<Match>{
     }
 
     @Override
-    public void save(Match match) throws SQLException {
+    public void save(Match match)  {
         try {
             Connection connection = DBConnector.getConnection();
+            System.out.println("connection success!");
             Statement stmt = connection.createStatement();
             String sql = "INSERT INTO matches " +
                     "VALUES ('" + match.getDate() + "','" + match.getHome() + "', '" + match.getAway() + "', '" + match.getLeague() + "', NULL ,'" + match.getTime() + "');";
             System.out.println(sql);
             stmt.executeUpdate(sql);
-        } catch (java.sql.SQLException e) {
-            System.out.println(e.toString());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -7,7 +7,9 @@ public class Match {
     String home;
     String away;
     String league;
-    Date date;
+
+    java.util.Date date ;
+    java.sql.Date sqlDate;
     Time time;
     String referee;
 
@@ -23,7 +25,8 @@ public class Match {
         this.home = home;
         this.away = away;
         this.league = league;
-        this.date = date;
+        this.date = new java.util.Date("10/10/2009");;
+        this.sqlDate= new java.sql.Date(date.getTime());
         this.time = time;
         this.referee = referee;
     }
@@ -36,8 +39,8 @@ public class Match {
     public String getLeague(){
         return league;
     }
-    public Date getDate(){
-        return date;
+    public  java.sql.Date getDate(){
+        return this.sqlDate;
     }
     public Time getTime() {
         return time;

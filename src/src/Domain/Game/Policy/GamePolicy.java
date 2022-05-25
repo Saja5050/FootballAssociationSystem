@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class GamePolicy {
+public class GamePolicy  {
     private String identified;
     private League l1;
     private ArrayList<Team> toSchedule;

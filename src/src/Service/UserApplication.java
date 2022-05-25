@@ -12,18 +12,14 @@ import java.util.List;
 
 public class UserApplication {
 
-    public static void main (String args[]){
-        MatchController temp=new MatchController();
-        GamePolicy p1= new GamePolicy("Israel");
-        List<Match> answer= p1.scheduleMatches("2");
-        for (Match match : answer){
-            temp.insertMatch(match);
-        }
-        Match elem = answer.get(3);
-    }
+
+    MatchController temp=new MatchController();
+
     UserController userController=new UserController();
     RefereeController refereeController = new RefereeController();
     TeamController teamController=new TeamController();
+    GamePolicy p1=new GamePolicy("Spain");
+
     public User sign_in( String UserName, String Password ) {
         User user = userController.sign_in(UserName,Password);
         System.out.println(user);
@@ -36,8 +32,14 @@ public class UserApplication {
         ArrayList<String> matches = refereeController.getMatches(referee);
         return matches;
     }
-    public  ArrayList<String> scudualeMaches(String Country){
-        System.out.println(teamController.getTeams(Country));
+    public  ArrayList<String> scudualeMaches(String country,String policy,int season ) //TODO Dont forget to add season */
+    {
+        p1= new GamePolicy(country);
+        List<Match> answer= p1.scheduleMatches(policy);
+        for (Match match : answer){
+            temp.insertMatch(match);
+        }
+        //Match elem = answer.get(3);
         return null;
     }
 
