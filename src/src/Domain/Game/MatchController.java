@@ -30,5 +30,12 @@ public class MatchController {
         return null;
     }
 
+    public Boolean busyYear(String league,int season){
+
+        return ((MatchDaoSQL)ud).getSeasonLeague(league,season);
+
+
+    }
+
 
 }

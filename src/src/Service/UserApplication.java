@@ -34,8 +34,16 @@ public class UserApplication {
     }
     public  ArrayList<String> scudualeMaches(String country,String policy,int season ) //TODO Dont forget to add season */
     {
-        p1= new GamePolicy(country);
+        if(temp.busyYear(country,season)){
+            System.out.println("Seasons Already BUSYYYYYYYYYYYYYYYYY!");
+            return null;
+        }
+
+        p1= new GamePolicy(country,season);
+
+
         List<Match> answer= p1.scheduleMatches(policy);
+
         for (Match match : answer){
             temp.insertMatch(match);
         }
