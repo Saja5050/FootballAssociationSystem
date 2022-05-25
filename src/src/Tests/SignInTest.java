@@ -10,11 +10,23 @@ public class SignInTest {
     UserApplication user=new UserApplication();
 
 
+
     @Test
+    @DisplayName("Sign in with vail System Manager User")
     public void signIn()
     {
+
         Assert.assertNotEquals(null,(user.sign_in("ehsank","123")));
     }
+
+    @Test
+    @DisplayName("Sign in with vail Referee User")
+    public void refsignIn()
+    {
+
+        Assert.assertNotEquals(null,(user.sign_in("khalilmh","123456")));
+    }
+
 
     @Test
     @DisplayName("Check With Wrong UserName")
@@ -35,6 +47,13 @@ public class SignInTest {
     }
 
 
+    @Test
+    @DisplayName("Sign in with invalid user and pass")
+    public void signIninValid()
+    {
+
+        Assert.assertEquals(null,(user.sign_in("asfs","1594423")));
+    }
 
 
     @Test
