@@ -1,6 +1,6 @@
 package Domain;
 
-public class User {
+public abstract class User {
     private String name;
     private String username;
     private String password;
@@ -36,10 +36,6 @@ public class User {
         this.password = password;
     }
 
-    public boolean is_referee() {
-        return false;
-    }
-    public boolean isAsR() {
-        return false;}
+    abstract public boolean is_referee() ;
 
 }

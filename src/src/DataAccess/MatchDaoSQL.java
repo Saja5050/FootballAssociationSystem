@@ -17,10 +17,7 @@ public class MatchDaoSQL implements Dao<Match>{
     DBConnector dbc = DBConnector.getInstance();
 
 
-    @Override
-    public ArrayList<Match> getTeam(String country1) {
-        return null;
-    }
+
 
     @Override
     public Match get(String username, String password) {

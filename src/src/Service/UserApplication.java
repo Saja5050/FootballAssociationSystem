@@ -15,18 +15,18 @@ public class UserApplication {
 
     MatchController temp=new MatchController();
 
-    UserController userController=new UserController();
+    SystemManagerController userController=new SystemManagerController();
     RefereeController refereeController = new RefereeController();
     TeamController teamController=new TeamController();
-    GamePolicy p1=new GamePolicy("Spain");
+    GamePolicy p1;
 
     public User sign_in( String UserName, String Password ) {
         User user = userController.sign_in(UserName,Password);
-        System.out.println(user);
+
         return user;
     }
     public void insertReferee (String Name, String UserName, String Password ) {
-        refereeController.insertReferee(Name, UserName, Password);
+        userController.insertReferee(Name, UserName, Password);
     }
     public ArrayList<String> getMatches(Referee referee) {
         ArrayList<String> matches = refereeController.getMatches(referee);

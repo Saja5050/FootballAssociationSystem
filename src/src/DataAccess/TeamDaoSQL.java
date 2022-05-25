@@ -20,7 +20,7 @@ public class TeamDaoSQL implements Dao<Team> {
         }
         DBConnector dbc = DBConnector.getInstance();
 
-    @Override
+
     public ArrayList<Team> getTeam(String country1) {
         ArrayList<Team> ans=new ArrayList<Team>();
         try {
