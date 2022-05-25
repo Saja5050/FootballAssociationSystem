@@ -40,6 +40,11 @@ public class MatchDaoSQL implements Dao<Match>{
     }
 
     @Override
+    public Boolean delete(Match match) {
+        return true;
+    }
+
+    @Override
     public ArrayList<String> get_Matches(Match referee) {
         return null;
     }

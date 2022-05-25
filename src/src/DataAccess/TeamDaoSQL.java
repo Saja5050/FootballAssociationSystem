@@ -1,5 +1,6 @@
 package DataAccess;
 
+import Domain.Game.Match;
 import Domain.Team;
 
 import java.sql.Connection;
@@ -19,6 +20,7 @@ public class TeamDaoSQL implements Dao<Team> {
         private TeamDaoSQL() {
         }
         DBConnector dbc = DBConnector.getInstance();
+
 
 
     public ArrayList<Team> getTeam(String country1) {
@@ -56,6 +58,11 @@ public class TeamDaoSQL implements Dao<Team> {
     @Override
     public void save(Team team) throws SQLException {
 
+    }
+
+    @Override
+    public Boolean delete(Team team) {
+        return null;
     }
 
     @Override

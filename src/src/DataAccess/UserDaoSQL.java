@@ -2,6 +2,7 @@ package DataAccess;
 
 import Domain.Referee;
 import Domain.SystemManager;
+import Domain.Team;
 import Domain.User;
 
 import java.sql.Connection;
@@ -61,9 +62,15 @@ public class UserDaoSQL implements Dao<User> {
     }
 
     @Override
+    public Boolean delete(User user) {
+        return null;
+    }
+
+    @Override
     public ArrayList<String> get_Matches(User referee) {
         return null;
     }
+
 
 
 }

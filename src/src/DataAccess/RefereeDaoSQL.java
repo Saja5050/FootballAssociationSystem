@@ -91,5 +91,20 @@ public class RefereeDaoSQL implements Dao<Referee> {
         }
         return false;
     }
+    public Boolean delete(Referee referee) {
+        try {
+            Connection connection = DBConnector.getConnection();
+            Statement stmt = connection.createStatement();
+            String sql = "Delete From users  " +
+                    "Where users.username='" + referee.getUsername() + "' and users.password='" + referee.getPassword() + "' and users.referee = 1;";
+            int resultSet = stmt.executeUpdate(sql);
+            if(resultSet!=0){
+                return true;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 
 }
