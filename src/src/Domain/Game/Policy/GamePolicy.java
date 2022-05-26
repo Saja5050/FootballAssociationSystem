@@ -29,17 +29,7 @@ public class GamePolicy  {
         this.gamesPerDay=2;
         this.season=season;
     }
-    public GamePolicy(String CountryName){
-        this.l1= new League(CountryName);
-        if(CountryName.equals("Spain")||CountryName.equals("spain")){
-            toSchedule=League.spainLeague;
 
-        }else{
-            toSchedule=League.israeliLeague;
-        }
-        this.numOfRounds=toSchedule.size()-1;
-        this.gamesPerDay=2;
-    }
     public List<Match> scheduleMatches(String policy){
         List<Match> temp;
         if(policy.equals("1")){
@@ -63,36 +53,29 @@ public class GamePolicy  {
         int correntIndex=0;
 
 
-        for (Match m: matchesList)
-        {
-            m.setDate(l1.startDate);
-            c.add(c.DATE, 1);
+
+        while(correntIndex<=matchesList.size()-matchPerRound){
+            for(int i =0;i<matchPerRound; i ++)
+            {
+                matchesList.get(correntIndex+i).setDate( l1.getStartDate());
+                matchesList.get(correntIndex+i).setTime(l1.getOfficalTime());
+
+            }
+//            int year=l1.startDate.getYear();
+//            int month = l1.startDate.getMonth();
+//            int day=l1.startDate.getDay();
+            c.setTime(l1.startDate);
+            correntIndex+=matchPerRound;
+            c.add(c.DATE, 7);
+//            year =c.get(Calendar.YEAR);
+//            month=c.get(Calendar.MONTH);
+//            day=c.get(Calendar.DAY_OF_MONTH);
+
             Date d=new Date(c.getTime().getYear(),c.getTime().getMonth(),c.getTime().getDay());
             l1.setStartDate(d);
 
 
         }
-//        while(correntIndex<=matchesList.size()-matchPerRound){
-//            for(int i =0;i<matchPerRound; i ++)
-//            {
-//                matchesList.get(correntIndex+i).setDate( l1.startDate);
-//                matchesList.get(correntIndex+i).setTime(l1.officalTime);
-//
-//            }
-////            int year=l1.startDate.getYear();
-////            int month = l1.startDate.getMonth();
-////            int day=l1.startDate.getDay();
-//            c.setTime(l1.startDate);
-//            correntIndex+=matchPerRound;
-//            c.add(c.DATE, 7);
-////            year =c.get(Calendar.YEAR);
-////            month=c.get(Calendar.MONTH);
-////            day=c.get(Calendar.DAY_OF_MONTH);
-//            Date d=new Date(c.getTime().getYear(),c.getTime().getMonth(),c.getTime().getDay());
-//            l1.setStartDate(d);
-//
-//
-//        }
 
 
     }
@@ -132,7 +115,7 @@ public class GamePolicy  {
                 if (!teamListWithoutFirstTeam.get(teamIndex).getName().equals("NullTeam")) {
                     if (i % 2 == 0) {
 
-                        matchToAdd = new Match(l1.getStartDate(), teamList.get(0).getName(), teamListWithoutFirstTeam.get(teamIndex).getName(), l1.getName(), null,l1.getOfficalTime(),this.season);
+                        matchToAdd = new Match(l1.getStartDate(),teamList.get(0).getName(), teamListWithoutFirstTeam.get(teamIndex).getName(), l1.getName(), null,l1.getOfficalTime(),this.season);
                     } else {
                         matchToAdd = new Match(l1.getStartDate(), teamList.get(0).getName(), teamListWithoutFirstTeam.get(teamIndex).getName(),l1.getName() ,null,l1.getOfficalTime(),this.season);
 
@@ -173,7 +156,7 @@ public class GamePolicy  {
                 }
             }
         }
-        //scheduleDateandHours(2,matchesList);
+       // scheduleDateandHours(2,matchesList);
         return matchesList;
     }
 

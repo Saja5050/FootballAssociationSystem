@@ -15,11 +15,12 @@ public class MatchController {
     }
     public void insertMatch (Match toInsert ) {
 
+        if(toInsert!=null){
         try {
             ud.save(toInsert);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }}
     }
     public ArrayList<String> getMatches(Referee referee ){
         try {

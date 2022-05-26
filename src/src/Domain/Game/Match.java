@@ -2,6 +2,8 @@ package Domain.Game;
 
 import java.sql.Time;
 import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class Match {
     String home;
@@ -20,10 +22,11 @@ public class Match {
 
     public void setDate(java.util.Date date) {
 
-        this.date =new Date(date.getYear(),date.getMonth(),date.getDay());
-        String str=this.date.toString();
 
-        this.sqlDate= java.sql.Date.valueOf(str);
+        NumberFormat numF=new DecimalFormat("00");
+        this.date =new Date(date.getYear(),date.getMonth(),date.getDay());
+
+        this.sqlDate= new java.sql.Date(date.getDate());
     }
 
     public int getSeason() {
@@ -36,7 +39,14 @@ public class Match {
         this.league = league;
         this.date =date;
 
-        this.sqlDate = new java.sql.Date(date.getTime());
+        if(date!=null)
+        {
+            String str="";
+            str=str+season;
+            str=str+"-01-01";
+            this.sqlDate= java.sql.Date.valueOf(str);
+        }
+
 
         this.time = time;
         this.referee = referee;

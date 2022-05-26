@@ -24,21 +24,8 @@ public class League {
     }
 
     public Date getStartDate() {
-        // get Date and add 1
-        int year=this.startDate.getYear();
-        int month=this.startDate.getMonth();
-        int day=this.startDate.getDay();
 
-        day++;
 
-        if(day>28)
-        {
-            day=1;
-            month++;
-        }
-        if(month>12)
-            year++;
-        this.startDate=new Date(year,month,day);
 
         return startDate;
     }
@@ -53,7 +40,7 @@ public class League {
     public League (String name,int season){
         TeamController teamController=new TeamController();
         this.name=name;
-        this.startDate=new Date(season-1900,1,1);
+        this.startDate=new Date(season,1,1);
         this.officalTime=new Time (20,30,00);
         this.israeliLeague =teamController.getTeams("Israel");
         this.spainLeague =teamController.getTeams("Spain");
