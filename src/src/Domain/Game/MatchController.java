@@ -30,7 +30,8 @@ public class MatchController {
         return null;
     }
 
-    public Boolean busyYear(String league,int season){
+    public ArrayList<Match> busyYear(String league, int season){
+
 
         return ((MatchDaoSQL)ud).getSeasonLeague(league,season);
 

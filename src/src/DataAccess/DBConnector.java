@@ -30,7 +30,7 @@ public class DBConnector {
             //return DriverManager.getConnection(URL, USER, PASS);
             //Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(URL,USER,PASS);
-            System.out.println("success");
+           // System.out.println("success");
             return conn;
         } catch (Exception ex) {
             throw new RuntimeException("Error connecting to the database", ex);

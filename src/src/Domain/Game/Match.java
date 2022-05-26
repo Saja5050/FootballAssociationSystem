@@ -18,20 +18,26 @@ public class Match {
         this.time = time;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(java.util.Date date) {
+
+        this.date =new Date(date.getYear(),date.getMonth(),date.getDay());
+        String str=this.date.toString();
+
+        this.sqlDate= java.sql.Date.valueOf(str);
     }
 
     public int getSeason() {
         return season;
     }
 
-    public Match(Date date, String home, String away, String league, String referee, Time time, int season){
+    public Match(java.util.Date  date, String home, String away, String league, String referee, Time time, int season){
         this.home = home;
         this.away = away;
         this.league = league;
         this.date =date;
-        this.sqlDate= new java.sql.Date(date.getTime());
+
+        this.sqlDate = new java.sql.Date(date.getTime());
+
         this.time = time;
         this.referee = referee;
         this.season=season;
@@ -55,7 +61,11 @@ public class Match {
     public String getLeague(){
         return league;
     }
-    public  java.sql.Date getDate(){
+    public  java.util.Date getDate(){
+        return this.date;
+    }
+    public  java.sql.Date getSQlDate(){
+
         return this.sqlDate;
     }
     public Time getTime() {

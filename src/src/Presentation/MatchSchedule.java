@@ -1,9 +1,11 @@
 package Presentation;
 
+import Domain.Game.Match;
 import Service.UserApplication;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.List;
 
 
 public class MatchSchedule  extends JDialog {
@@ -52,9 +54,21 @@ public class MatchSchedule  extends JDialog {
     private void onOK() {
         // add your code here
         UserApplication ua = new UserApplication();
-        ua.scudualeMaches(textField1.getText(),textField2.getText() ,Integer.parseInt(textField3.getText()));
-        System.out.println(textField1.getText()+", "+textField2.getText() +", "+textField3.getText());
-        dispose();
+        if(textField1.getText().equalsIgnoreCase("spain") || textField1.getText().equalsIgnoreCase("israel")){
+            List<Match> m=ua.scudualeMaches(textField1.getText(),textField2.getText() ,Integer.parseInt(textField3.getText()));
+            if(m==null)
+            {
+                JOptionPane.showMessageDialog(null, "Season Already Busy");
+            }
+            System.out.println(textField1.getText()+", "+textField2.getText() +", "+textField3.getText());
+            dispose();
+
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "League Does Not Exists!");
+        }
+
     }
 
     private void onCancel() {

@@ -27,12 +27,13 @@ public class TeamDaoSQL implements Dao<Team> {
         ArrayList<Team> ans=new ArrayList<Team>();
         try {
             Connection connection = DBConnector.getConnection();
-            System.out.println("connection success!");
+           // System.out.println("connection success!");
             Statement stmt = connection.createStatement();
             String sql ="Select * From teams Where teams.country = '" + country1 + "'" +
                     "ORDER BY id ASC;";
-            System.out.println(sql);
+          //  System.out.println(sql);
             ResultSet resultSet = stmt.executeQuery(sql);
+
             while (resultSet.next()) {
                 int id = Integer.parseInt(resultSet.getString("id"));
                 String name = resultSet.getString("name");

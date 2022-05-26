@@ -4,7 +4,7 @@ import Domain.Game.League;
 import Domain.Game.Match;
 import Domain.Team;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -18,8 +18,8 @@ public class GamePolicy  {
     private int gamesPerDay;
     private int season;
     public GamePolicy(String CountryName, int season){
-        this.l1= new League(CountryName);
-        if(CountryName.equals("Spain")||CountryName.equals("spain")){
+        this.l1= new League(CountryName,season);
+        if(CountryName.equalsIgnoreCase("spain")){
             toSchedule=League.spainLeague;
 
         }else{
@@ -61,26 +61,38 @@ public class GamePolicy  {
         Calendar c = Calendar.getInstance();
         int round =0;
         int correntIndex=0;
-        while(correntIndex<=matchesList.size()-matchPerRound){
-            for(int i =0;i<matchPerRound; i ++)
-            {
-                matchesList.get(correntIndex+i).setDate(l1.startDate);
 
-                matchesList.get(correntIndex+i).setTime(l1.officalTime);
 
-            }
-            int year=l1.startDate.getYear();
-            int month = l1.startDate.getMonth();
-            int day=l1.startDate.getDay();
-            c.set(year,month,day);
-            correntIndex+=matchPerRound;
-            c.add(c.DATE, 7);
-            year =c.get(Calendar.YEAR);
-            month=c.get(Calendar.MONTH);
-            day=c.get(Calendar.DAY_OF_MONTH);
-            l1.setStartDate(new Date (year,month,day));
+        for (Match m: matchesList)
+        {
+            m.setDate(l1.startDate);
+            c.add(c.DATE, 1);
+            Date d=new Date(c.getTime().getYear(),c.getTime().getMonth(),c.getTime().getDay());
+            l1.setStartDate(d);
+
 
         }
+//        while(correntIndex<=matchesList.size()-matchPerRound){
+//            for(int i =0;i<matchPerRound; i ++)
+//            {
+//                matchesList.get(correntIndex+i).setDate( l1.startDate);
+//                matchesList.get(correntIndex+i).setTime(l1.officalTime);
+//
+//            }
+////            int year=l1.startDate.getYear();
+////            int month = l1.startDate.getMonth();
+////            int day=l1.startDate.getDay();
+//            c.setTime(l1.startDate);
+//            correntIndex+=matchPerRound;
+//            c.add(c.DATE, 7);
+////            year =c.get(Calendar.YEAR);
+////            month=c.get(Calendar.MONTH);
+////            day=c.get(Calendar.DAY_OF_MONTH);
+//            Date d=new Date(c.getTime().getYear(),c.getTime().getMonth(),c.getTime().getDay());
+//            l1.setStartDate(d);
+//
+//
+//        }
 
 
     }
@@ -114,31 +126,22 @@ public class GamePolicy  {
 
                 //rotate the team according to the current round
                 int teamIndex = i % (teamListWithoutFirstTeam.size());
-                int year=this.season-1900;
-                int month=1;
-                int day=1;
+           ;
 
                 //the first team at index 0 never changes, but every round the homeAway method changes.
                 if (!teamListWithoutFirstTeam.get(teamIndex).getName().equals("NullTeam")) {
                     if (i % 2 == 0) {
-                        matchToAdd = new Match(new Date(year,month,day++), teamList.get(0).getName(), teamListWithoutFirstTeam.get(teamIndex).getName(), l1.getName(), null,null,this.season);
+
+                        matchToAdd = new Match(l1.getStartDate(), teamList.get(0).getName(), teamListWithoutFirstTeam.get(teamIndex).getName(), l1.getName(), null,l1.getOfficalTime(),this.season);
                     } else {
-                        matchToAdd = new Match(new Date(year,month,day++), teamListWithoutFirstTeam.get(teamIndex).getName(), teamList.get(0).getName(), l1.getName(), null,null,this.season);
+                        matchToAdd = new Match(l1.getStartDate(), teamList.get(0).getName(), teamListWithoutFirstTeam.get(teamIndex).getName(),l1.getName() ,null,l1.getOfficalTime(),this.season);
+
                     }
                     matchesList.add(matchToAdd);
                 }
 
 
-                if(day>30)
-                {
-                    day=1;
-                    month++;
-                }
 
-                if(month>12){
-                    month=1;
-                    year++;
-                }
 
                 //runs over the teamsList ( except the first team at index 0 that we already set ), and schedule matches according to their indexes.
                 //every loop the indexes change, so that at the end of the loops every team scheduled against all the other teams.
@@ -155,10 +158,10 @@ public class GamePolicy  {
 
                         //changes between home and away.
                         if (i % 2 == 0) {
-                            matchToAdd = new Match(new Date(year,month  ,day++), firstTeam.getName(), secondTeam.getName(), l1.getName(), null,null,this.season);
+                            matchToAdd = new Match(l1.getStartDate(), firstTeam.getName(), secondTeam.getName(), l1.getName(), null,l1.getOfficalTime(),this.season);
 
                         } else {
-                            matchToAdd = new Match(new Date(year,month  ,day++), secondTeam.getName(), firstTeam.getName(), l1.getName(), null,null,this.season);
+                            matchToAdd = new Match(l1.getStartDate(), secondTeam.getName(), firstTeam.getName(), l1.getName(), null,l1.getOfficalTime(),this.season);
 
                         }
 
@@ -166,21 +169,11 @@ public class GamePolicy  {
                     }
 
 
-                    if(day>30)
-                    {
-                        day=1;
-                        month=month++;
-                    }
-
-                    if(month>12){
-                        month=1;
-                        year++;
-                    }
 
                 }
             }
         }
-        scheduleDateandHours(toSchedule.size()/2,matchesList);
+        //scheduleDateandHours(2,matchesList);
         return matchesList;
     }
 

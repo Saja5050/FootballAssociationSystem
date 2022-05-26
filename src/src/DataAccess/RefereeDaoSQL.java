@@ -53,11 +53,11 @@ public class RefereeDaoSQL implements Dao<Referee> {
         ArrayList<String> matches = new ArrayList<>();
         try {
             Connection connection = DBConnector.getConnection();
-            System.out.println("connection success!");
+            //System.out.println("connection success!");
             Statement stmt = connection.createStatement();
             String sql = "Select * From matches  " +
                     "Where matches.referee='" + username + "';";
-            System.out.println(sql);
+            //System.out.println(sql);
             ResultSet resultSet = stmt.executeQuery(sql);
             while (resultSet.next()) {
                 // int i = resultSet.getInt("id");

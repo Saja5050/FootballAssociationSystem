@@ -2,7 +2,7 @@ package Domain.Game;
 import Domain.Team;
 import Domain.TeamController;
 import Domain.TeamController.*;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -23,9 +23,41 @@ public class League {
         return name;
     }
 
+    public Date getStartDate() {
+        // get Date and add 1
+        int year=this.startDate.getYear();
+        int month=this.startDate.getMonth();
+        int day=this.startDate.getDay();
+
+        day++;
+
+        if(day>28)
+        {
+            day=1;
+            month++;
+        }
+        if(month>12)
+            year++;
+        this.startDate=new Date(year,month,day);
+
+        return startDate;
+    }
+
+    public Time getOfficalTime() {
+        return officalTime;
+    }
+
     //    public League(String name){
 //        this.name = name;
 //    }
+    public League (String name,int season){
+        TeamController teamController=new TeamController();
+        this.name=name;
+        this.startDate=new Date(season-1900,1,1);
+        this.officalTime=new Time (20,30,00);
+        this.israeliLeague =teamController.getTeams("Israel");
+        this.spainLeague =teamController.getTeams("Spain");
+    }
     public League (String name){
         TeamController teamController=new TeamController();
         this.name=name;
