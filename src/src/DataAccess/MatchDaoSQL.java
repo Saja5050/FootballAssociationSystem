@@ -50,6 +50,7 @@ public class MatchDaoSQL implements Dao<Match>{
 
     public Boolean getSeasonLeague(String league,int season) {
 
+
         ArrayList<Team> ans=new ArrayList<Team>();
         try {
             Connection connection = DBConnector.getConnection();
