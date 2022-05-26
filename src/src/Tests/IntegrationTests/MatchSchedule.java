@@ -1,3 +1,5 @@
+package IntegrationTests;
+
 import DataAccess.Dao;
 import DataAccess.MatchDaoSQL;
 import DataAccess.RefereeDaoSQL;
@@ -47,7 +49,7 @@ public class MatchSchedule {
     @DisplayName("Try To  Schedule a busy Season")
     public void seaonsExisit()
     {
-       List<Match> Spainmatches= MatchSchedule.userApplication.scudualeMaches("spain","1",2000);
+        List<Match> Spainmatches= MatchSchedule.userApplication.scudualeMaches("spain","1",2000);
         List<Match> israelMatches= MatchSchedule.userApplication.scudualeMaches("israel","1",2000);
 
         Assertions.assertEquals(null,Spainmatches);

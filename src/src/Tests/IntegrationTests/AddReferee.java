@@ -1,3 +1,5 @@
+package IntegrationTests;
+
 import DataAccess.Dao;
 import DataAccess.RefereeDaoSQL;
 import DataAccess.UserDaoSQL;

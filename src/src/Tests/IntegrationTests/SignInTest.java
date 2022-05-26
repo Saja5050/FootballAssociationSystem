@@ -1,4 +1,4 @@
-
+package IntegrationTests;
 
 import Service.UserApplication;
 import org.junit.jupiter.api.Test;
