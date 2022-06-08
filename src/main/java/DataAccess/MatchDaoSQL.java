@@ -27,7 +27,7 @@ public class MatchDaoSQL implements Dao<Match>{
            // System.out.println("connection success!");
             Statement stmt = connection.createStatement();
             String sql = "INSERT INTO matches " +
-                    "VALUES ('" + match.getSQlDate() + "','" + match.getHome() + "', '" + match.getAway() + "', '" + match.getLeague() + "', NULL ,'" + match.getTime() +"', '"+match.getSeason()+ "');";
+                    "VALUES ('" + match.getSQlDate() + "','" + match.getHome() + "', '" + match.getAway() + "', '" + match.getLeague() + "','"+match.getReferee() + "' ,'" + match.getTime() +"', '"+match.getSeason()+ "');";
             //System.out.println(sql);
 
             stmt.executeUpdate(sql);

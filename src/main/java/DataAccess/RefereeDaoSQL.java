@@ -106,5 +106,35 @@ public class RefereeDaoSQL implements Dao<Referee> {
         }
         return false;
     }
+    public ArrayList<Referee> getAllreferess()
+    {
+        ArrayList<Referee> ans=new ArrayList<Referee>();
+        try {
+            Connection connection = DBConnector.getConnection();
+            Statement stmt = connection.createStatement();
+            String sql ="Select * From users Where users.Referee='1';";
+            //System.out.println(sql);
+            ResultSet resultSet = stmt.executeQuery(sql);
+            // if (resultSet.next()==false) return false;
+            while (resultSet.next()) {
+                Referee r1=new Referee(resultSet.getString("name"),resultSet.getString("username"),resultSet.getString("password"));
+                ans.add(r1);
+            }
+            stmt.close();
+            if(ans.size()>0)
+            {
+                return ans;
+            }
+
+            return null;
+        }
+        catch (Exception e)
+        {
+
+            throw new RuntimeException(e);
+        }
+
+
+    }
 
 }

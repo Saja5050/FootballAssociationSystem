@@ -13,6 +13,8 @@ public class Match {
     java.util.Date date ;
     java.sql.Date sqlDate;
     Time time;
+
+
     String referee;
     int season;
 
@@ -71,12 +73,19 @@ public class Match {
     public String getLeague(){
         return league;
     }
+    public String getReferee(){
+        return referee;
+    }
     public  java.util.Date getDate(){
         return this.date;
     }
     public  java.sql.Date getSQlDate(){
 
         return this.sqlDate;
+    }
+    public void setRef(String r){
+        this.referee=r;
+
     }
     public Time getTime() {
         return time;

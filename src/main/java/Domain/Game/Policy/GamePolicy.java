@@ -1,14 +1,13 @@
 package Domain.Game.Policy;
 
+import DataAccess.RefereeDaoSQL;
 import Domain.Game.League;
 import Domain.Game.Match;
+import Domain.Referee;
 import Domain.Team;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 //import java.time.LocalDate;
 import java.lang.Object;
 import org.joda.time.*;
@@ -59,10 +58,12 @@ public class GamePolicy  {
 
 
         while(correntIndex<=matchesList.size()-matchPerRound){
+            ArrayList<String> refs=getTwoRefs();
             for(int i =0;i<matchPerRound; i ++)
             {
                 matchesList.get(correntIndex+i).setDate( l1.getStartDate());
                 matchesList.get(correntIndex+i).setTime(l1.getOfficalTime());
+                matchesList.get(correntIndex+i).setRef( refs.get(i));
 
             }
 //            int year=l1.startDate.getYear();
@@ -191,5 +192,19 @@ public class GamePolicy  {
 //        }
 //        return null;
 //    }
+public  ArrayList<String> getTwoRefs()
+{
+    RefereeDaoSQL referee_dao=RefereeDaoSQL.getInstance();
+    ArrayList<String> twoRefs=new ArrayList<String>();
+    ArrayList<Referee> allRefs=referee_dao.getAllreferess();
 
+    Random rn = new Random();
+    int ran=rn.nextInt(allRefs.size()-2); // Size Returns len of list
+
+    twoRefs.add(allRefs.get(ran).getUsername());
+    twoRefs.add(allRefs.get(ran+1).getUsername());
+
+    return twoRefs;
+
+}
 }
