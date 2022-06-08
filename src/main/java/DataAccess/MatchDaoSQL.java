@@ -32,6 +32,7 @@ public class MatchDaoSQL implements Dao<Match>{
 
             stmt.executeUpdate(sql);
             stmt.close();
+            connection.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -199,7 +199,7 @@ public  ArrayList<String> getTwoRefs()
     ArrayList<Referee> allRefs=referee_dao.getAllreferess();
 
     Random rn = new Random();
-    int ran=rn.nextInt(allRefs.size()-2); // Size Returns len of list
+    int ran=rn.nextInt(allRefs.size()-1); // Size Returns len of list
 
     twoRefs.add(allRefs.get(ran).getUsername());
     twoRefs.add(allRefs.get(ran+1).getUsername());
