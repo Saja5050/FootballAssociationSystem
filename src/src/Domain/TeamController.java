@@ -10,7 +10,7 @@ public  class TeamController {
     }
     public ArrayList<Team> getTeams(String leagueName){
         try {
-            return  (ArrayList<Team>)ud.getTeam(leagueName);
+            return  (ArrayList<Team>)(((TeamDaoSQL)ud).getTeam(leagueName));
         }catch (Exception e) {
             e.printStackTrace();
         }

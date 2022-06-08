@@ -47,16 +47,15 @@ public class UserPresentation extends JDialog{
             }
         });
     }
-//    public static void main (String args[]){
-//        JFrame frame = new JFrame("Example");
-//        frame.setContentPane(new UserPresentation().mainPanel);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.pack();
-//        frame.setVisible(true);
-//        League Champ=new League();
-//
-//
-//
-//    }
+    public static void main (String args[]){
+        JFrame frame = new JFrame("Example");
+       frame.setContentPane(new UserPresentation().mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+       frame.setVisible(true);
+
+
+
+   }
 
 }

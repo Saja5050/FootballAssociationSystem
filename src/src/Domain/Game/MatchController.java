@@ -15,11 +15,12 @@ public class MatchController {
     }
     public void insertMatch (Match toInsert ) {
 
+        if(toInsert!=null){
         try {
             ud.save(toInsert);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }}
     }
     public ArrayList<String> getMatches(Referee referee ){
         try {
@@ -28,6 +29,14 @@ public class MatchController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public ArrayList<Match> busyYear(String league, int season){
+
+
+        return ((MatchDaoSQL)ud).getSeasonLeague(league,season);
+
+
     }
 
 

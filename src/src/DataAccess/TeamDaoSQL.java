@@ -1,5 +1,6 @@
 package DataAccess;
 
+import Domain.Game.Match;
 import Domain.Team;
 
 import java.sql.Connection;
@@ -20,17 +21,19 @@ public class TeamDaoSQL implements Dao<Team> {
         }
         DBConnector dbc = DBConnector.getInstance();
 
-    @Override
+
+
     public ArrayList<Team> getTeam(String country1) {
         ArrayList<Team> ans=new ArrayList<Team>();
         try {
             Connection connection = DBConnector.getConnection();
-            System.out.println("connection success!");
+           // System.out.println("connection success!");
             Statement stmt = connection.createStatement();
             String sql ="Select * From teams Where teams.country = '" + country1 + "'" +
                     "ORDER BY id ASC;";
-            System.out.println(sql);
+          //  System.out.println(sql);
             ResultSet resultSet = stmt.executeQuery(sql);
+
             while (resultSet.next()) {
                 int id = Integer.parseInt(resultSet.getString("id"));
                 String name = resultSet.getString("name");
@@ -56,6 +59,11 @@ public class TeamDaoSQL implements Dao<Team> {
     @Override
     public void save(Team team) throws SQLException {
 
+    }
+
+    @Override
+    public Boolean delete(Team team) {
+        return null;
     }
 
     @Override

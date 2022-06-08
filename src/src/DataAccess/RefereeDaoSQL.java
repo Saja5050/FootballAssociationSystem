@@ -21,10 +21,7 @@ public class RefereeDaoSQL implements Dao<Referee> {
     DBConnector dbc = DBConnector.getInstance();
 
 
-    @Override
-    public ArrayList<Referee> getTeam(String country1) {
-        return null;
-    }
+
 
     @Override
     public Referee get(String username, String password) {
@@ -47,17 +44,7 @@ public class RefereeDaoSQL implements Dao<Referee> {
     }
     @Override
     public void save(Referee referee)  {
-        try {
-            Connection connection = DBConnector.getConnection();
-            System.out.println("connection success!");
-            Statement stmt = connection.createStatement();
-            String sql = "INSERT INTO users " +
-                    "VALUES (NULL,'" + referee.getName() + "','" + referee.getUsername() + "', '" + referee.getPassword() + "',1);";
-            System.out.println(sql);
-            stmt.executeUpdate(sql);
-        } catch (java.sql.SQLException e) {
-            System.out.println(e.toString());
-        }
+
     }
 
     @Override
@@ -66,11 +53,11 @@ public class RefereeDaoSQL implements Dao<Referee> {
         ArrayList<String> matches = new ArrayList<>();
         try {
             Connection connection = DBConnector.getConnection();
-            System.out.println("connection success!");
+            //System.out.println("connection success!");
             Statement stmt = connection.createStatement();
             String sql = "Select * From matches  " +
                     "Where matches.referee='" + username + "';";
-            System.out.println(sql);
+            //System.out.println(sql);
             ResultSet resultSet = stmt.executeQuery(sql);
             while (resultSet.next()) {
                 // int i = resultSet.getInt("id");
@@ -85,5 +72,39 @@ public class RefereeDaoSQL implements Dao<Referee> {
         return matches;
     }
 
+
+    public Boolean deleteRef(String username, String password) {
+        try {
+            Connection connection = DBConnector.getConnection();
+            Statement stmt = connection.createStatement();
+            String sql = "Delete From users  " +
+                    "Where users.username='" + username + "' and users.password='" + password + "' and users.referee = 1;";
+
+
+            int resultSet = stmt.executeUpdate(sql);
+            if(resultSet!=0){
+                return true;
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+    public Boolean delete(Referee referee) {
+        try {
+            Connection connection = DBConnector.getConnection();
+            Statement stmt = connection.createStatement();
+            String sql = "Delete From users  " +
+                    "Where users.username='" + referee.getUsername() + "' and users.password='" + referee.getPassword() + "' and users.referee = 1;";
+            int resultSet = stmt.executeUpdate(sql);
+            if(resultSet!=0){
+                return true;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 
 }

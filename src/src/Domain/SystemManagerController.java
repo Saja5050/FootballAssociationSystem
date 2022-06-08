@@ -1,20 +1,22 @@
 package Domain;
 import DataAccess.*;
 
-import java.sql.SQLException;
-
-public class UserController {
-   Dao ud;
-    public UserController() {ud = UserDaoSQL.getInstance();
+public class SystemManagerController {
+    Dao ud;
+    public SystemManagerController() {ud = UserDaoSQL.getInstance();
     }
-    public void insertUser (String Name, String UserName ,String Password ) {
-        User aUser= new User(Name,UserName,Password);
+
+
+    public void insertReferee (String Name, String UserName, String Password ) {
+        Referee aReferee= new Referee(Name, UserName ,Password);
         try {
-            ud.save(aUser);
+            ud.save(aReferee);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 
     public User sign_in(String userName, String password) {
         try {

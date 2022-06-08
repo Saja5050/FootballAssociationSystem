@@ -26,6 +26,8 @@ public class Team {
         this.country = country;
         this.league = league;
     }
+
+
     public int getTeamId(){
         return id;
     }
